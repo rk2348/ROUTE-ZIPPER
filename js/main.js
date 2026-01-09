@@ -4,12 +4,39 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMerch();
     initMemos();
 
-    // 初期表示のタブにアニメーション適用
-    document.getElementById('tab-search').classList.add('animate-fade');
+    // オープニングアニメーション制御
+    const splash = document.getElementById('splash-screen');
+    const gateTop = document.getElementById('zip-gate-top');
+    const gateBottom = document.getElementById('zip-gate-bottom');
+    const logo = document.getElementById('splash-logo');
+    const text = document.getElementById('splash-text');
 
+    // 1. 白背景（ゲート）が開く
+    setTimeout(() => {
+        gateTop.classList.add('zip-open-top');
+        gateBottom.classList.add('zip-open-bottom');
+    }, 300);
+
+    // 2. ロゴが登場
+    setTimeout(() => {
+        logo.classList.add('animate-pop');
+    }, 800);
+
+    // 3. テキストが登場
+    setTimeout(() => {
+        text.classList.add('animate-text-up');
+    }, 1100);
+
+    // 4. フェードアウトしてメイン画面を表示
+    setTimeout(() => {
+        splash.classList.add('splash-fade-out');
+        document.getElementById('tab-search').classList.add('animate-fade');
+    }, 2200);
+
+    // イベントリスナーの登録
     document.getElementById('routeSearchBtn')?.addEventListener('click', handleRouteSearch);
     document.getElementById('travelSearchBtn')?.addEventListener('click', handleTravelSearch);
-    document.getElementById('foodSearchBtn')?.addEventListener('click', handleFoodSearch); // 追加
+    document.getElementById('foodSearchBtn')?.addEventListener('click', handleFoodSearch);
 });
 
 function switchTab(tabName) {

@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#fffaf0] pb-20">
+    <div id="splash-screen" class="fixed inset-0 z-[100] flex items-center justify-center bg-white overflow-hidden">
+        <div id="splash-bg" class="absolute inset-0 flex">
+            <div class="flex-1 h-full" style="background-color: #ff4d4d;"></div>
+            <div class="flex-1 h-full" style="background-color: #ff9f43;"></div>
+            <div class="flex-1 h-full" style="background-color: #feca57;"></div>
+            <div class="flex-1 h-full" style="background-color: #55efc4;"></div>
+            <div class="flex-1 h-full" style="background-color: #74b9ff;"></div>
+            <div class="flex-1 h-full" style="background-color: #ff9ff3;"></div>
+            <div class="flex-1 h-full" style="background-color: #e2e2e2;"></div>
+        </div>
+        <div class="relative z-10 flex flex-col items-center">
+            <div id="splash-logo" class="text-4xl mb-4 transform scale-0">🤐</div>
+            <h1 id="splash-text" class="text-3xl font-bold text-white drop-shadow-lg tracking-tighter opacity-0">
+                ROUTE ZIPPER
+            </h1>
+        </div>
+        <div id="zip-gate-top" class="absolute top-0 left-0 w-full h-1/2 bg-white transition-transform duration-700 ease-in-out"></div>
+        <div id="zip-gate-bottom" class="absolute bottom-0 left-0 w-full h-1/2 bg-white transition-transform duration-700 ease-in-out"></div>
+    </div>
+
     <header class="bg-white p-4 sticky top-0 z-50 shadow-sm border-b fz-border border-opacity-20">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold fz-main tracking-tighter">ROUTE ZIPPER</h1>
