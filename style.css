@@ -6,7 +6,6 @@ body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     color: #4a5568;
     overflow-x: hidden;
-    /* 背景色もテーマカラーに合わせて微調整（薄く色づく） */
     transition: background-color 0.5s ease;
 }
 
@@ -14,7 +13,6 @@ body {
 .fz-bg { background-color: var(--main-color); transition: background-color 0.4s; }
 .fz-border { border-color: var(--main-color); transition: border-color 0.4s; }
 
-/* 🌟 アニメーション定義 */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -31,7 +29,6 @@ body {
     100% { transform: scale(1.5); opacity: 0; }
 }
 
-/* クラス適用用 */
 .animate-fade { animation: fadeInUp 0.4s ease-out forwards; }
 .animate-zip { animation: zipBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 
@@ -39,10 +36,8 @@ body {
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
 }
 
-/* タブ切り替え時のアニメーション */
 .tab-content.hidden { display: none; }
 
-/* 🛒 物販アイテムのスタイル */
 .merch-item {
     display: flex;
     justify-content: space-between;
@@ -54,7 +49,6 @@ body {
     animation: fadeInUp 0.3s ease-out;
 }
 
-/* メンバーカラー選択時のホバー効果 */
 #theme-selector button:hover {
     transform: scale(1.2);
 }

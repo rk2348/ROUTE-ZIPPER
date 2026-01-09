@@ -36,6 +36,13 @@
 
                 <div class="mb-6 pt-4 border-t border-dashed">
                     <p class="text-xs font-bold text-gray-400 mb-2 ml-1">【STEP 2】遠征の準備</p>
+                    <input type="text" id="departureInput" class="w-full p-3 border rounded-xl focus:outline-none fz-border mb-3 text-sm" placeholder="出発地（例：大阪）">
+                    
+                    <div class="relative mb-3">
+                        <input type="date" id="dateInput" class="w-full p-3 border rounded-xl focus:outline-none fz-border text-sm appearance-none bg-white min-h-[46px]">
+                        <span class="absolute right-3 top-3 text-gray-400 pointer-events-none text-[10px] font-bold">出発日</span>
+                    </div>
+
                     <select id="priceSelect" class="w-full p-3 border rounded-xl focus:outline-none fz-border mb-3 text-sm">
                         <option value="">予算（ホテル検索用）</option>
                         <option value="5000">5,000円以下</option>

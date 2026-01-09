@@ -93,17 +93,23 @@ async function handleTravelSearch() {
     if (!data) { alert("会場を選択または入力してください"); return; }
 
     const price = document.getElementById('priceSelect').value;
+    const departure = document.getElementById('departureInput').value.trim();
+    const date = document.getElementById('dateInput').value;
+
     const resultDiv = document.getElementById('routeResult');
     const detailDiv = document.getElementById('routeDetail');
 
     const hotelUrl = `https://www.google.com/maps/search/${encodeURIComponent(data.station + ' ホテル ' + (price ? price + '円' : ''))}`;
-    const busUrl = `https://www.google.com/search?q=${encodeURIComponent(data.station + ' 夜行バス 予約')}`;
+    
+    // 出発地と日付をクエリに含める
+    const busQuery = `${departure} ${data.station} 夜行バス ${date} 予約`.trim();
+    const busUrl = `https://www.google.com/search?q=${encodeURIComponent(busQuery)}`;
 
     resultDiv.classList.remove('hidden');
     detailDiv.innerHTML = `
         <div class="mb-4">
             <h4 class="font-bold text-xl text-gray-800">🏨 遠征の準備：${data.station}周辺</h4>
-            <p class="text-xs text-gray-500 mt-1">予算や移動手段に合わせてZIPしました</p>
+            <p class="text-xs text-gray-500 mt-1">${departure || '各地'}から${data.title}への遠征情報をZIPしました</p>
         </div>
         <div class="grid grid-cols-1 gap-3">
             <a href="${hotelUrl}" target="_blank" class="flex items-center justify-between bg-blue-50 text-blue-700 p-4 rounded-2xl font-bold no-underline border border-blue-100">
@@ -112,7 +118,9 @@ async function handleTravelSearch() {
             </a>
             <a href="${busUrl}" target="_blank" class="flex items-center justify-between bg-indigo-50 text-indigo-700 p-4 rounded-2xl font-bold no-underline border border-indigo-100">
                 <span class="flex items-center gap-2">🚌 <span>夜行バスを比較・予約する</span></span>
-                <span class="text-xs bg-indigo-100 px-2 py-1 rounded">検索 ↗</span>
+                <span class="text-[10px] bg-indigo-100 px-2 py-1 rounded leading-tight text-center">
+                    ${date ? date + '<br>' : ''}${departure || '出発地'}発 ↗
+                </span>
             </a>
         </div>
         <div class="mt-6 p-4 bg-gray-50 rounded-2xl text-xs text-gray-500 leading-relaxed">
@@ -123,7 +131,6 @@ async function handleTravelSearch() {
     resultDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 3. 飲食店検索の実行
 async function handleFoodSearch() {
     const data = await getSelectedVenueData();
     if (!data) { alert("会場を選択または入力してください"); return; }
