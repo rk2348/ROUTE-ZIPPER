@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROUTE ZIPPER</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤐</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#fffaf0] pb-20">
+    <header class="bg-white p-4 sticky top-0 z-50 shadow-sm border-b fz-border border-opacity-20">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold fz-main tracking-tighter">ROUTE ZIPPER</h1>
+            <div id="theme-selector" class="flex gap-1"></div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-4">
+        <div id="tab-search" class="tab-content">
+            <section class="bg-white p-6 rounded-3xl card-shadow border-2 fz-border mb-6">
+                <h2 class="text-lg font-bold mb-4 flex items-center gap-2">📍 会場をZIPする</h2>
+                <select id="venueSelect" class="w-full p-3 border rounded-xl focus:outline-none fz-border mb-3 text-sm">
+                    <option value="">定番の会場から選択</option>
+                    <option value="budokan">日本武道館</option>
+                    <option value="ariake">有明アリーナ</option>
+                    <option value="pia">ぴあアリーナMM</option>
+                </select>
+                <input type="text" id="customVenueInput" class="w-full p-3 border rounded-xl focus:outline-none fz-border mb-6 text-sm" placeholder="会場名を入力（例：東京ドーム）">
+
+                <div class="mb-6">
+                    <p class="text-xs font-bold text-gray-400 mb-2 ml-1">【STEP 1】会場までの行き方</p>
+                    <button id="routeSearchBtn" class="w-full fz-bg text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-transform mb-2">会場への動線をZIP！</button>
+                </div>
+
+                <div class="pt-4 border-t border-dashed">
+                    <p class="text-xs font-bold text-gray-400 mb-2 ml-1">【STEP 2】遠征の準備</p>
+                    <select id="priceSelect" class="w-full p-3 border rounded-xl focus:outline-none fz-border mb-3 text-sm">
+                        <option value="">予算（ホテル検索用）</option>
+                        <option value="5000">5,000円以下</option>
+                        <option value="10000">10,000円以下</option>
+                    </select>
+                    <button id="travelSearchBtn" class="w-full bg-blue-500 text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-transform">ホテル・夜行バスをZIP！</button>
+                </div>
+            </section>
+            <div id="routeResult" class="hidden space-y-4">
+                <div id="routeDetail" class="bg-white p-5 rounded-2xl card-shadow border-l-8 fz-border"></div>
+            </div>
+        </div>
+
+        <div id="tab-memo" class="tab-content hidden space-y-6">
+            <section class="bg-white p-6 rounded-3xl card-shadow border-2 border-dashed fz-border">
+                <h2 class="text-lg font-bold mb-3">📝 現場メモ</h2>
+                <input type="text" id="seatMemo" class="w-full p-2 text-sm border-b focus:outline-none fz-border mb-3" placeholder="座席：アリーナ〇列〇番">
+                <textarea id="eventMemo" class="w-full p-2 text-sm bg-gray-50 rounded-lg focus:outline-none h-24" placeholder="取引・待ち合わせメモなど"></textarea>
+            </section>
+            <section class="bg-white p-6 rounded-3xl card-shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold">🎒 持ち物</h2>
+                    <button onclick="clearChecklist()" class="text-[10px] border px-2 py-1 rounded">リセット</button>
+                </div>
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="newItemInput" class="flex-1 p-2 border-b text-sm focus:outline-none fz-border" placeholder="追加...">
+                    <button onclick="addItem()" class="fz-bg text-white px-4 py-2 rounded-lg text-sm">追加</button>
+                </div>
+                <div id="checklistArea" class="space-y-2"></div>
+            </section>
+        </div>
+
+        <div id="tab-calc" class="tab-content hidden">
+            <section class="bg-white p-6 rounded-3xl card-shadow">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold">💸 物販計算機</h2>
+                    <button onclick="clearMerch()" class="text-[10px] border px-2 py-1 rounded">リセット</button>
+                </div>
+                <input type="text" id="merchName" class="w-full p-3 border rounded-xl text-sm mb-2" placeholder="グッズ名">
+                <div class="flex gap-2 mb-4">
+                    <input type="number" id="merchPrice" class="flex-1 p-3 border rounded-xl text-sm" placeholder="単価">
+                    <input type="number" id="merchQty" class="w-16 p-3 border rounded-xl text-sm" value="1">
+                    <button onclick="addMerch()" class="fz-bg text-white px-4 py-3 rounded-xl font-bold">＋</button>
+                </div>
+                <div id="merchList" class="mb-4"></div>
+                <div class="pt-4 border-t flex justify-between items-center font-bold text-xl">
+                    <span>合計</span><span id="merchTotal" class="fz-main text-2xl">¥0</span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2 z-50">
+        <button onclick="switchTab('search')" id="nav-search" class="nav-item active-nav flex flex-col items-center p-2 text-xs font-bold text-gray-400">
+            <span class="text-xl">🔍</span><span>検索</span>
+        </button>
+        <button onclick="switchTab('memo')" id="nav-memo" class="nav-item flex flex-col items-center p-2 text-xs font-bold text-gray-400">
+            <span class="text-xl">📝</span><span>メモ</span>
+        </button>
+        <button onclick="switchTab('calc')" id="nav-calc" class="nav-item flex flex-col items-center p-2 text-xs font-bold text-gray-400">
+            <span class="text-xl">💸</span><span>計算</span>
+        </button>
+    </nav>
+
+    <script src="js/theme.js"></script>
+    <script src="js/checklist.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
