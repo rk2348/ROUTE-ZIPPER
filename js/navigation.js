@@ -31,7 +31,6 @@ const venues = {
     }
 };
 
-// 共通の会場データ取得関数
 async function getSelectedVenueData() {
     const select = document.getElementById('venueSelect');
     const customInput = document.getElementById('customVenueInput');
@@ -55,7 +54,6 @@ async function getSelectedVenueData() {
     return null;
 }
 
-// 1. 動線検索の実行
 async function handleRouteSearch() {
     const data = await getSelectedVenueData();
     if (!data) { alert("会場を選択または入力してください"); return; }
@@ -90,7 +88,6 @@ async function handleRouteSearch() {
     resultDiv.scrollIntoView({ behavior: 'smooth' });
 }
 
-// 2. ホテル・夜行バス検索の実行
 async function handleTravelSearch() {
     const data = await getSelectedVenueData();
     if (!data) { alert("会場を選択または入力してください"); return; }
@@ -121,6 +118,36 @@ async function handleTravelSearch() {
         <div class="mt-6 p-4 bg-gray-50 rounded-2xl text-xs text-gray-500 leading-relaxed">
             <p class="font-bold mb-1">💡 遠征のコツ</p>
             夜行バスは早めの予約がお得です。ホテルは最寄り駅だけでなく、乗り換えなしで数駅離れた場所を探すと予算に合う場所が見つかりやすくなります。
+        </div>
+    `;
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+// 3. 飲食店検索の実行
+async function handleFoodSearch() {
+    const data = await getSelectedVenueData();
+    if (!data) { alert("会場を選択または入力してください"); return; }
+
+    const resultDiv = document.getElementById('routeResult');
+    const detailDiv = document.getElementById('routeDetail');
+
+    const foodUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.title + ' 飲食店')}`;
+
+    resultDiv.classList.remove('hidden');
+    detailDiv.innerHTML = `
+        <div class="mb-4">
+            <h4 class="font-bold text-xl text-gray-800">🍴 周辺の飲食店：${data.title}</h4>
+            <p class="text-xs text-gray-500 mt-1">打ち上げや待ち合わせに使えるお店をZIPしました</p>
+        </div>
+        <div class="grid grid-cols-1 gap-3">
+            <a href="${foodUrl}" target="_blank" class="flex items-center justify-between bg-orange-50 text-orange-700 p-4 rounded-2xl font-bold no-underline border border-orange-100">
+                <span class="flex items-center gap-2">🍽️ <span>近くのレストラン・カフェを探す</span></span>
+                <span class="text-xs bg-orange-100 px-2 py-1 rounded">検索 ↗</span>
+            </a>
+        </div>
+        <div class="mt-6 p-4 bg-gray-50 rounded-2xl text-xs text-gray-500 leading-relaxed">
+            <p class="font-bold mb-1">💡 グルメのアドバイス</p>
+            イベント前後は会場近くの店舗が非常に混雑します。予約ができるお店を探すか、隣駅まで移動して探すとスムーズに入店できることが多いです。
         </div>
     `;
     resultDiv.scrollIntoView({ behavior: 'smooth' });

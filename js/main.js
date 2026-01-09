@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('routeSearchBtn')?.addEventListener('click', handleRouteSearch);
     document.getElementById('travelSearchBtn')?.addEventListener('click', handleTravelSearch);
+    document.getElementById('foodSearchBtn')?.addEventListener('click', handleFoodSearch); // 追加
 });
 
 function switchTab(tabName) {
@@ -21,7 +22,6 @@ function switchTab(tabName) {
     const target = document.getElementById(`tab-${tabName}`);
     target.classList.remove('hidden');
     
-    // 強制的に再フローを発生させてアニメーションをリセット
     void target.offsetWidth; 
     target.classList.add('animate-fade');
 
