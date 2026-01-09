@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ROUTE ZIPPER</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤐</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fz-gradient' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%23ff4d4d' /><stop offset='20%' style='stop-color:%23ff9f43' /><stop offset='40%' style='stop-color:%23feca57' /><stop offset='60%' style='stop-color:%2355efc4' /><stop offset='80%' style='stop-color:%2374b9ff' /><stop offset='100%' style='stop-color:%23ff9ff3' /></linearGradient></defs><rect width='90' height='90' x='5' y='5' rx='20' fill='white' /><path d='M50 85 L50 45' stroke='url(%23fz-gradient)' stroke-width='8' stroke-linecap='round' stroke-dasharray='0.1 12' /><path d='M50 15 C35 15 25 27 25 40 C25 55 50 75 50 75 C50 75 75 55 75 40 C75 27 65 15 50 15 Z' fill='url(%23fz-gradient)' /><circle cx='50' cy='38' r='8' fill='white' /></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -21,7 +21,14 @@
             <div class="flex-1 h-full" style="background-color: #e2e2e2;"></div>
         </div>
         <div class="relative z-10 flex flex-col items-center">
-            <div id="splash-logo" class="text-4xl mb-4 transform scale-0">🤐</div>
+            <div id="splash-logo" class="w-24 h-24 mb-4 transform scale-0">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="90" height="90" x="5" y="5" rx="20" fill="white" />
+                    <path d="M50 85 L50 45" stroke="#ccc" stroke-width="8" stroke-linecap="round" stroke-dasharray="0.1 12" />
+                    <path d="M50 15 C35 15 25 27 25 40 C25 55 50 75 50 75 C50 75 75 55 75 40 C75 27 65 15 50 15 Z" fill="#ff85a2" />
+                    <circle cx="50" cy="38" r="8" fill="white" />
+                </svg>
+            </div>
             <h1 id="splash-text" class="text-3xl font-bold text-white drop-shadow-lg tracking-tighter opacity-0">
                 ROUTE ZIPPER
             </h1>
